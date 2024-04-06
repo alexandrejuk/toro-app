@@ -1,12 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Stock } from './interfaces/stock.interface';
+import { ToroApiService } from './services/toro-api.service';
+import { Order, ResponseOrder } from './interfaces/order.interface';
+import { AccountInfo, Transfer } from './interfaces/transfer.interface';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  isOpen = false;
+export class AppComponent implements OnInit {
+  message: string = ""
+  messages: any = {
+    "your request has been successfully processed.": "Order processada com sucesso 🎉!",
+    "invalid customer ID or stock symbol.": "Usuário ou nome da ação inválido🤦!",
+    "insufficient balance. Purchase cannot be made.": "Saldo insuficiente 😢!",
+    "internal Server Error": "Error interno ⚙️",
+    "processed By transfer": "Transferência realizada com sucesso 🎉!",
+    "processed By pix": "Transferência realizada com sucesso 🎉!",
+    "transaction rejected because the CPF does not match the registered account.": "Transferência recusada 😢!",
+    "error_stocks": "Erro ao buscar ações ⚙️!"
+  }
+
+  isOpen: boolean = false;
+  isOpenToast: boolean = false;
+  isOpenTransfer: boolean = true;
+
   quantity: number = 1;
   orderPrice: number = 0.0
 
@@ -16,55 +35,39 @@ export class AppComponent {
     account: '300123',
   };
 
-  stock: any = {};
+  stock: Stock | any = {};
+  stocks: Stock[] = []
 
-  stocks = [
-    {
-    "_id": "660d97e431d2a55b5db50835",
-    "currentPrice": 28.44,
-    "symbol": "PETR4"
-    },
-    {
-    "_id": "660d983b31d2a55b5db50836",
-    "currentPrice": 25.91,
-    "symbol": "MGLU3"
-    },
-    {
-    "_id": "660d985131d2a55b5db50837",
-    "currentPrice": 25.91,
-    "symbol": "VVAR3"
-    },
-    {
-    "_id": "660d986d31d2a55b5db50839",
-    "currentPrice": 115.98,
-    "symbol": "TORO4"
-    },
-    {
-    "_id": "660d985e31d2a55b5db50838",
-    "currentPrice": 40.77,
-    "symbol": "SANB11"
-    }
-  ]
+  constructor(private toroApiService: ToroApiService) {}
 
-  closeModal(event: any) {
+  ngOnInit() {
+    this.toroApiService.getStocks().subscribe({
+      next: (data: Stock[]) => {
+        this.stocks = data;
+      },
+      error: () => {
+        this.message = this.messages.error_stocks
+        this.isOpenToast = true
+        setTimeout(() => this.isOpenToast = false, 4000)
+      }
+    });
+  }
+
+  closeModal(event: MouseEvent) {
     if (event.target === event.currentTarget) {
-      this.isOpen = false;
       this.isOpen = false;
       this.stock = {}
       this.orderPrice = 0.00
       this.quantity = 1
     }
-  
   }
 
-  incrementQuantity(event: any) {
-    event.stopPropagation()
+  incrementQuantity() {
     this.quantity++;
     this.orderPrice = this.stock.currentPrice * this.quantity
   }
 
-  decrementQuantity(event: any) {
-    event.stopPropagation()
+  decrementQuantity() {
     if (this.quantity > 1) {
       this.quantity--;
       this.orderPrice = this.stock.currentPrice * this.quantity
@@ -73,19 +76,77 @@ export class AppComponent {
     }
   }
 
-  selectStock(stock: any) {
+  selectStock(stock: Stock) {
     this.stock = stock
     this.orderPrice = stock.currentPrice
     this.quantity = 1
     this.isOpen = true
-    console.log(stock, this.isOpen)
   }
   
-  buyStock(event: any) {
-    event.stopPropagation()
+  buyStock() {
+    const payload: Order = {
+      amount: this.quantity,
+      symbol: this.stock.symbol,
+      customerId: "660d9bc631d2a55b5db5083a",
+    }
+
+    this.toroApiService.buyStock(payload)
+      .subscribe({
+        next: (data: ResponseOrder) => {
+          this.message = this.messages[data.message]
+          this.isOpenToast = true
+          setTimeout(() => this.isOpenToast = false, 4000)
+        },
+        error: error => {
+          this.message = this.messages[error.error.message]
+          this.isOpenToast = true
+          setTimeout(() => this.isOpenToast = false, 4000)
+        },
+        complete: () => {
+          this.isOpen = false;
+          this.stock = {}
+          this.orderPrice = 0.00
+          this.quantity = 1
+        }
+      })
   }
 
-  stopPropagation(event: MouseEvent) {
-    event.stopPropagation();
+  newTransfer() {
+    this.isOpenTransfer = true;
+  }
+
+  closeModalTransfer(event: MouseEvent) {
+    if (event.target === event.currentTarget) {
+      this.isOpenTransfer = false;
+    }
+  }
+
+  handleTransfer(formData: AccountInfo) {
+    const payload: Transfer = {
+      amount: formData.amount || 0,
+      event: formData.event || "",
+      origin: {
+        bank: formData.bank,
+        branch: formData.branch,
+        account: formData.account,
+      },
+      target: this.target,
+    }
+
+    this.toroApiService.transfer(payload)
+      .subscribe({
+        next: (data: ResponseOrder) => {
+          this.isOpenTransfer = false;
+          this.message = this.messages[data.message]
+          this.isOpenToast = true
+          setTimeout(() => this.isOpenToast = false, 4000)
+        },
+        error: (error) => {
+          this.isOpenTransfer = false;
+          this.message = this.messages[error.error.message]
+          this.isOpenToast = true
+          setTimeout(() => this.isOpenToast = false, 4000)
+        },
+      })
   }
 }
