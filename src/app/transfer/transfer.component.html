@@ -1,0 +1,128 @@
+<div class="modal-container modal-container--{{ isOpenTransfer ? 'open' : 'closed' }}" (click)="closeModalTransfer.emit($event)">
+  <div class="modal-content">
+    <h2 class="modal-content__title">Nova transferência</h2>
+    <form [formGroup]="modalForm" class="modal-form">
+      <div class="modal-form__group">
+        <label
+          for="bank"
+          class="modal-form__label"
+        >Banco*</label>
+        <input
+          type="text"
+          id="bank"
+          name="bank"
+          formControlName="bank"
+          class="modal-form__input {{ modalForm.get('bank')?.invalid && modalForm.get('bank')?.touched ? 'error' : '' }}"
+        >
+        <span
+          *ngIf="modalForm.get('bank')?.invalid && modalForm.get('bank')?.touched"
+          class="error-message"
+        >
+        Campo obrigatório
+        </span>
+      </div>
+
+      <div class="modal-form__group_wrapper">
+        <div class="modal-form__group">
+          <label
+            for="branch"
+            class="modal-form__label"
+          >Agência*
+          </label>
+          <input
+            type="text"
+            id="branch"
+            name="branch"
+            formControlName="branch"
+            class="modal-form__input {{ modalForm.get('branch')?.invalid && modalForm.get('branch')?.touched ? 'error' : '' }}"
+          >
+          <span
+            *ngIf="modalForm.get('branch')?.invalid && modalForm.get('branch')?.touched"
+            class="error-message"
+          >
+          Campo obrigatório
+          </span>
+        </div>
+        <div class="modal-form__group">
+          <label
+            for="account"
+            class="modal-form__label"
+          >Conta*</label>
+          <input
+            type="text"
+            id="account"
+            name="account"
+            formControlName="account"
+            class="modal-form__input {{ modalForm.get('account')?.invalid && modalForm.get('account')?.touched ? 'error' : '' }}"
+          >
+          <span
+            *ngIf="modalForm.get('account')?.invalid && modalForm.get('account')?.touched"
+            class="error-message"
+          >
+          Campo obrigatório
+          </span>
+        </div>
+      </div>
+      
+      <div class="modal-form__group">
+        <label
+          for="cpf"
+          class="modal-form__label"
+        >CPF*</label>
+        <input
+          type="text"
+          id="cpf"
+          name="cpf"
+          formControlName="cpf"
+          class="modal-form__input {{ modalForm.get('cpf')?.invalid && modalForm.get('cpf')?.touched ? 'error' : '' }}"
+        >
+        <span
+          *ngIf="modalForm.get('cpf')?.invalid && modalForm.get('cpf')?.touched"
+          class="error-message"
+        >
+        Campo obrigatório
+        </span>
+      </div>
+      <div class="modal-form__group">
+        <label
+          for="event"
+          class="modal-form__label"
+        >Tipo*</label>
+        <select
+        id="event"
+        name="event"
+        formControlName="event" class="modal-form__select">
+          <option value="PIX" class="modal-form__option">PIX</option>
+          <option value="TRANSFER" class="modal-form__option">TED</option>
+        </select>
+      </div>
+      <div class="modal-form__group">
+        <label
+          for="amount"
+          class="modal-form__label"
+        >Valor*</label>
+        <input
+          type="number"
+          id="amount"
+          name="amount"
+          formControlName="amount"
+          class="modal-form__input {{ modalForm.get('amount')?.invalid && modalForm.get('amount')?.touched ? 'error' : '' }}"
+        >
+        <span
+          *ngIf="modalForm.get('amount')?.invalid && modalForm.get('amount')?.touched"
+          class="error-message"
+        >
+        Campo obrigatório
+        </span>
+      </div>
+      <button 
+        type="button" 
+        class="modal-form__button" 
+        (click)="handleSave()" 
+        [disabled]="modalForm.invalid"
+      >
+        Transferir
+      </button>
+    </form>
+  </div>
+</div>
