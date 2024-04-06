@@ -1,0 +1,12 @@
+<div class="modal-overlay modal-overlay--{{ isOpen ? 'open' : 'closed' }}" (click)="closeModal.emit($event)">
+  <div class="modal-content" (click)="stopPropagation($event)">
+    <h2 class="modal-content__title">{{ stock.symbol }}</h2>
+    <p class="modal-content__subtitle">{{ stock.currentPrice | currency:'BRL':'symbol':'1.2-2' }}</p>
+    <div class="modal-content__quantity-controls">
+      <button class="modal-content__btn-control" (click)="decrementQuantity.emit()">-</button>
+      <span class="modal-content__control-quantity">{{ quantity }}</span>
+      <button class="modal-content__btn-control" (click)="incrementQuantity.emit()">+</button>
+    </div>
+    <button class="modal-content__control-buy" (click)="buyStock.emit()">Comprar <span>{{ orderPrice | currency:'BRL':'symbol':'1.2-2' }}</span></button>
+  </div>
+</div>
