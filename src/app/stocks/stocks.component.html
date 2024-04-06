@@ -1,0 +1,9 @@
+<h3 class="stock-title">Stocks</h3>
+<div class="stocks">
+  <ul class="stocks__list">
+    <li class="stocks__item" *ngFor="let stock of stocks" (click)="stockSelected.emit(stock)">
+      <span class="stocks__symbol">{{ stock.symbol }}</span>
+      <span class="stocks__price">{{ stock.currentPrice | currency:'BRL':'symbol':'1.2-2' }}</span>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,45 @@
+.stock-title {
+  color: #0C1947;
+  margin-bottom: 0;
+  padding: 10px;
+}
+
+.stocks {
+  padding: 0;
+  margin: 0;
+}
+
+.stocks__list {
+  padding: 0;
+  margin: 0;
+}
+
+.stocks__item {
+  justify-content: space-between;
+  display: flex;
+  padding: 30px 20px;
+  position: relative;
+  list-style: none; 
+  color: #0C1947;
+  font-weight: bold;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.7px;
+    background-image: linear-gradient(to right, rgba(0,0,0,0.1), rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+  }
+}
+
+.stocks__item:last-child::after {
+  height: 0;
+}
+
+.stock-symbol,
+.stock-price {
+  display: inline-block;
+  font-weight: bold;
+}
