@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   isOpen: boolean = false;
   isOpenToast: boolean = false;
-  isOpenTransfer: boolean = true;
+  isOpenTransfer: boolean = false;
 
   quantity: number = 1;
   orderPrice: number = 0.0
