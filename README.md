@@ -1,27 +1,33 @@
-# ToroApp
+# Teste de Desenvolvimento - Toro
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
+Este repositório contém um teste de desenvolvimento para a empresa Toro, utilizando Angular.
 
-## Development server
+## Descrição
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O teste consiste na implementação de diversos componentes e funcionalidades em uma aplicação Angular, incluindo:
 
-## Code scaffolding
+- Componentes como `Account`, `Stocks`, `Modal`, `Toast`, e `Transfer`.
+- Integração com uma API da Toro para obtenção de dados de ações e realização de transferências.
+- Testes unitários e de integração para garantir o funcionamento correto dos componentes e funcionalidades.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tecnologias Utilizadas
 
-## Build
+- Angular
+- TypeScript
+- HTML/CSS
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Executando a Aplicação
 
-## Running unit tests
+1. Certifique-se de ter o Node.js e o Angular CLI instalados globalmente em sua máquina.
+2. Clone este repositório git@github.com:alexandrejuk/toro-app.git.
+3. Navegue até o diretório clonado e execute `npm install` para instalar as dependências.
+4. Após a instalação das dependências, execute `ng serve` para iniciar o servidor de desenvolvimento.
+5. Acesse `http://localhost:4200` em seu navegador para visualizar a aplicação.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Executando Testes
 
-## Running end-to-end tests
+- Execute `ng test` para executar os testes unitários via [Karma](https://karma-runner.github.io).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Autor
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+[Alexandre Soares](https://github.com/alexandrejuk)
