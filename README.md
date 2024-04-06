@@ -28,6 +28,9 @@ O teste consiste na implementação de diversos componentes e funcionalidades em
 
 - Execute `ng test` para executar os testes unitários via [Karma](https://karma-runner.github.io).
 
+## Screenshot
+![toro-corretora](./screenshot/app.png)
+
 ## Autor
 
 [Alexandre Soares](https://github.com/alexandrejuk)
