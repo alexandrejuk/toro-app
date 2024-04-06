@@ -12,6 +12,7 @@ export class TransferComponent {
   @Input() isOpenTransfer: boolean = false;
   @Output() handleTransfer: EventEmitter<AccountInfo> = new EventEmitter<AccountInfo>();
   @Output() closeModalTransfer: EventEmitter<MouseEvent> =  new EventEmitter<MouseEvent>();
+  cpfValue: string = "98765432101";
 
   constructor(private formBuilder: FormBuilder) {
     this.modalForm = this.formBuilder.group({
@@ -26,6 +27,13 @@ export class TransferComponent {
 
   handleSave() {
     this.handleTransfer.emit(this.modalForm.value)
-    this.modalForm.reset()
+    this.modalForm.reset({
+      branch: '',
+      account: '',
+      bank: '',
+      amount: 0,
+      cpf: "98765432101",
+      event: "PIX"
+    })
   }
 }

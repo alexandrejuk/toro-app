@@ -129,6 +129,7 @@ export class AppComponent implements OnInit {
         bank: formData.bank,
         branch: formData.branch,
         account: formData.account,
+        cpf: formData.cpf,
       },
       target: this.target,
     }
