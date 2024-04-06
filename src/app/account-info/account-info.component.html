@@ -1,0 +1,26 @@
+<div class="account">
+    <div class="account__account-info">
+        <div class="account__info">
+            <p class="account__title">Informações da Conta</p>
+            <p class="account__title">BANCO</p>
+            <p class="account__subtitle">{{ target.bank }}</p>
+        </div>
+        <div class="account__info">
+            <app-bank-logo />
+        </div>
+    </div>
+    <div class="account__account-info">
+        <div class="account__info">
+            <p class="account__title">AGÊNCIA</p>
+            <p class="account__subtitle">{{ target.branch }}</p>
+        </div>
+        <div class="account__info">
+            <p class="account__title">CONTA</p>
+            <p class="account__subtitle">{{ target.account }}</p>
+        </div>
+        <div class="account__info">
+            <p class="account__title">TRANSFERIR</p>
+            <button class="account__btn" (click)="newTransfer.emit()">Transferir</button>
+        </div>
+    </div>
+</div>
