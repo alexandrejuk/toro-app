@@ -13,6 +13,8 @@
           name="bank"
           formControlName="bank"
           class="modal-form__input {{ modalForm.get('bank')?.invalid && modalForm.get('bank')?.touched ? 'error' : '' }}"
+          pattern="\d*"
+          inputmode="numeric"
         >
         <span
           *ngIf="modalForm.get('bank')?.invalid && modalForm.get('bank')?.touched"
@@ -35,6 +37,8 @@
             name="branch"
             formControlName="branch"
             class="modal-form__input {{ modalForm.get('branch')?.invalid && modalForm.get('branch')?.touched ? 'error' : '' }}"
+            pattern="\d*"
+            inputmode="numeric"
           >
           <span
             *ngIf="modalForm.get('branch')?.invalid && modalForm.get('branch')?.touched"
@@ -54,6 +58,8 @@
             name="account"
             formControlName="account"
             class="modal-form__input {{ modalForm.get('account')?.invalid && modalForm.get('account')?.touched ? 'error' : '' }}"
+            pattern="\d*"
+            inputmode="numeric"
           >
           <span
             *ngIf="modalForm.get('account')?.invalid && modalForm.get('account')?.touched"
@@ -75,6 +81,8 @@
           name="cpf"
           formControlName="cpf"
           class="modal-form__input {{ modalForm.get('cpf')?.invalid && modalForm.get('cpf')?.touched ? 'error' : '' }}"
+          pattern="\d*"
+          inputmode="numeric"
         >
         <span
           *ngIf="modalForm.get('cpf')?.invalid && modalForm.get('cpf')?.touched"
@@ -107,6 +115,8 @@
           name="amount"
           formControlName="amount"
           class="modal-form__input {{ modalForm.get('amount')?.invalid && modalForm.get('amount')?.touched ? 'error' : '' }}"
+          pattern="\d*"
+          inputmode="numeric"
         >
         <span
           *ngIf="modalForm.get('amount')?.invalid && modalForm.get('amount')?.touched"

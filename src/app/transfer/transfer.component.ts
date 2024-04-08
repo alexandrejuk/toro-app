@@ -16,12 +16,12 @@ export class TransferComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.modalForm = this.formBuilder.group({
-      branch: ['', [Validators.required]],
-      account: ['', Validators.required],
-      bank: ['', [Validators.required]],
-      cpf: ['98765432101', Validators.required],
+      branch: ['',  [Validators.required, Validators.pattern(/^\d+$/)]],
+      account: ['',  [Validators.required, Validators.pattern(/^\d+$/)]],
+      bank: ['',  [Validators.required, Validators.pattern(/^\d+$/)]],
+      cpf: ['98765432101', [Validators.required, Validators.pattern(/^\d+$/)]],
       event: ['PIX'],
-      amount: [0, [Validators.required]],
+      amount: [0,  [Validators.required, Validators.pattern(/^\d+$/)]],
     });
   }
 
